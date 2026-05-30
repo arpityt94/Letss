@@ -1,0 +1,211 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with balance and referral details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "referralCode": { "type": "string" },
+        "balance": { "type": "number" },
+        "totalEarnings": { "type": "number" },
+        "totalWithdrawn": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "mobileNumber": { "type": "string" },
+        "referralCodeUsed": { "type": "string" },
+        "referredBy": { "type": "string" },
+        "isBlocked": { "type": "boolean" },
+        "activePackageId": { "type": "string" },
+        "upiId": { "type": "string" },
+        "bankName": { "type": "string" },
+        "bankAccount": { "type": "string" },
+        "bankIfsc": { "type": "string" },
+        "bankHolder": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role", "referralCode", "balance", "totalEarnings", "totalWithdrawn", "createdAt"]
+    },
+    "PasswordHash": {
+      "title": "PasswordHash",
+      "description": "Secure storage of password hashes",
+      "type": "object",
+      "properties": {
+        "passwordHash": { "type": "string" }
+      },
+      "required": ["passwordHash"]
+    },
+    "Package": {
+      "title": "Package",
+      "description": "A course study package",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "courses": { "type": "array" },
+        "color": { "type": "string" },
+        "popularityText": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "courses", "color"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "An educational course video module",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "packageId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "duration": { "type": "string" },
+        "lessonsCount": { "type": "number" }
+      },
+      "required": ["id", "packageId", "title", "description", "thumbnailUrl", "videoUrl", "duration", "lessonsCount"]
+    },
+    "PaymentSubmission": {
+      "title": "PaymentSubmission",
+      "description": "A payment submission for verification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "packageId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "price": { "type": "number" },
+        "paymentScreenshot": { "type": "string" },
+        "upiTxnId": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "rejectionReason": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "verifiedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "userName", "userEmail", "packageId", "packageName", "price", "paymentScreenshot", "upiTxnId", "status", "createdAt"]
+    },
+    "Commission": {
+      "title": "Commission",
+      "description": "An affiliate commission record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "referredUserId": { "type": "string" },
+        "referredUserName": { "type": "string" },
+        "packageId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "userName", "referredUserId", "referredUserName", "packageId", "packageName", "amount", "status", "createdAt"]
+    },
+    "WithdrawalRequest": {
+      "title": "WithdrawalRequest",
+      "description": "A wallet withdrawal request by user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "amount": { "type": "number" },
+        "method": { "type": "string", "enum": ["upi", "bank"] },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "createdAt": { "type": "string" },
+        "details": { "type": "object" }
+      },
+      "required": ["id", "userId", "userName", "userEmail", "amount", "method", "status", "createdAt", "details"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "An in-app user notification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "createdAt"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "A dashboard global notice text",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["id", "title", "content", "createdAt"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Dynamic layout configuration for the app",
+      "type": "object",
+      "properties": {
+        "logoText": { "type": "string" },
+        "tagline": { "type": "string" },
+        "heroHeaderFirst": { "type": "string" },
+        "heroHeaderHighlight": { "type": "string" },
+        "heroHeaderLast": { "type": "string" },
+        "heroSubtext": { "type": "string" },
+        "heroParagraph": { "type": "string" },
+        "bannerImageUrl": { "type": "string" },
+        "maintenanceMode": { "type": "boolean" }
+      },
+      "required": ["logoText", "tagline", "heroHeaderFirst", "heroHeaderHighlight", "heroHeaderLast", "heroSubtext", "heroParagraph"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "A user profile"
+    },
+    "/passwords/{userId}": {
+      "schema": "PasswordHash",
+      "description": "A secure password hash mapping"
+    },
+    "/packages/{packageId}": {
+      "schema": "Package",
+      "description": "Study courses package definitions"
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "Single course video chapters"
+    },
+    "/payments/{paymentId}": {
+      "schema": "PaymentSubmission",
+      "description": "User purchase verification slips"
+    },
+    "/commissions/{commissionId}": {
+      "schema": "Commission",
+      "description": "Direct referral 80% payouts logged"
+    },
+    "/withdrawals/{withdrawalId}": {
+      "schema": "WithdrawalRequest",
+      "description": "Payout requests submitted to Admin"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "In-app announcements or updates for users"
+    },
+    "/notices/{noticeId}": {
+      "schema": "Notice",
+      "description": "Global home board notice items"
+    },
+    "/settings/{settingsId}": {
+      "schema": "SystemSettings",
+      "description": "Dynamic logo, banner, and descriptions configs"
+    }
+  }
+}

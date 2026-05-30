@@ -1,0 +1,6 @@
+{
+  "name": "Let's Success 2.0",
+  "description": "A premium dark-theme affiliate learning platform featuring courses, referral commission system, manual payments, and admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
